@@ -1,0 +1,26 @@
+# made on each computer
+kit/.venv/
+kit/tools/
+__pycache__/
+*.pyc
+.DS_Store
+
+# the user's own work stays out of the kit's repository
+work/*
+!work/README.txt
+Finished Reels/*
+!Finished Reels/README.txt
+My Photos/*
+!My Photos/README.txt
+My Footage/*
+!My Footage/README.txt
+
+# shipped media (re-included in case a parent repository ignores media files)
+!kit/voice-samples/*.mp3
+!kit/assets/sounds/*.flac
+!kit/examples/**/*.mp4
+!kit/examples/**/*.jpg
+My Style/*
+!My Style/README.txt
+My References/*
+!My References/README.txt

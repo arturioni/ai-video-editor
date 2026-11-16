@@ -1,0 +1,23 @@
+{
+  "desert": {
+    "title": "Colorado Great Sand Dunes National Park",
+    "author": "Mshuang2",
+    "licence": "CC0",
+    "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Colorado_Great_Sand_Dunes_National_Park.jpg"
+  },
+  "tomato": {
+    "title": "Spock's Bane",
+    "author": "Shisma",
+    "licence": "CC0",
+    "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Spock%27s_Bane.jpg"
+  },
+  "cabin": {
+    "title": "Vue ciel et aile sur un vol TAP Lisbonne-Lyon en février 2022",
+    "author": "Benoît Prieur",
+    "licence": "CC0",
+    "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Vue_ciel_et_aile_sur_un_vol_TAP_Lisbonne-Lyon_en_f%C3%A9vrier_2022.jpg"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "ai-video-editor",
+  "version": "1.0.0",
+  "description": "Make finished vertical reels from one line: script, free local voiceover, animated scenes in your own style, word-timed captions, a self-check of every frame, render and paper sound effects. Built on HyperFrames.",
+  "author": { "name": "Artur Rioni" },
+  "homepage": "https://github.com/arturioni/ai-video-editor",
+  "license": "MIT",
+  "keywords": ["video", "reels", "shorts", "tiktok", "hyperframes", "captions", "voiceover"],
+  "skills": "./.claude/skills/"
+}

@@ -1,0 +1,15 @@
+[project]
+name = "ai-video-editor"
+version = "1.0.0"
+description = "The engine behind the AI Video Editor folder: voice, word timing, scenes, checks, sound."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy>=1.26",
+    "kokoro-onnx>=0.4",
+    "soundfile>=0.12",
+    "faster-whisper>=1.1",
+    "static-ffmpeg>=2.5",
+]
+
+[tool.uv]
+package = false

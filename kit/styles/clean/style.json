@@ -1,0 +1,28 @@
+{
+  "name": "Clean",
+  "about": "White and calm: dark words, one blue accent, captions in a white box. Good for tips, explainers and business topics.",
+  "signature": "",
+  "colors": {
+    "main": "#FFFFFF",
+    "alt": "#111318",
+    "text_on_main": "#111318",
+    "text_on_alt": "#FFFFFF",
+    "text_on_photo": "#FFFFFF",
+    "accent": "#2F6BFF",
+    "accent_on_alt": "#6E9BFF",
+    "shade": "#000000"
+  },
+  "fonts": {
+    "headline": {"family": "Inter", "weight": 800, "case": "none", "tracking": -0.03, "line": 1.0},
+    "body": {"family": "Inter", "weight": 600}
+  },
+  "headline_size": 190,
+  "captions": {"size": 54, "y": 1420, "style": "box", "box": "#FFFFFF", "box_text": "#111318", "case": "sentence", "max_words": 4},
+  "transition": "slide",
+  "motion": "smooth",
+  "marks": "clean",
+  "texture": "none",
+  "photos": "color",
+  "pace": "normal",
+  "sound": "on"
+}

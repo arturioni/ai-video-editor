@@ -1,0 +1,28 @@
+{
+  "name": "Soft",
+  "about": "Pale blue and navy, a pink accent, hand-drawn marks, light film grain, gentle fades. Warm and personal, for stories and lessons.",
+  "signature": "",
+  "colors": {
+    "main": "#E9EFF6",
+    "alt": "#1F2A44",
+    "text_on_main": "#1F2A44",
+    "text_on_alt": "#FFFFFF",
+    "text_on_photo": "#FFFFFF",
+    "accent": "#E8437A",
+    "accent_on_alt": "#FF7BA5",
+    "shade": "#141B2D"
+  },
+  "fonts": {
+    "headline": {"family": "Inter", "weight": 700, "case": "none", "tracking": -0.02, "line": 1.02},
+    "body": {"family": "Inter", "weight": 500}
+  },
+  "headline_size": 170,
+  "captions": {"size": 54, "y": 1430, "style": "plain", "case": "sentence", "max_words": 4},
+  "transition": "fade",
+  "motion": "smooth",
+  "marks": "hand",
+  "texture": "grain",
+  "photos": "color",
+  "pace": "calm",
+  "sound": "on"
+}

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run --project kit kit/run.py:*)",
+      "Bash(~/.local/bin/uv run --project kit kit/run.py:*)",
+      "Bash(uv --version)"
+    ]
+  }
+}

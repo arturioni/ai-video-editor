@@ -1,0 +1,1 @@
+Your own look lives here: style.json (colours, fonts, captions, transitions), style.md (the look in words) and voice.md (how your scripts sound). Say "set up my style" and Claude makes them from reels you like, or from a starter look.

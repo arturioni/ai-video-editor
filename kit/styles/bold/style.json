@@ -1,0 +1,28 @@
+{
+  "name": "Bold",
+  "about": "Black screen, huge white capitals, yellow highlights, punchy zoom cuts and outlined captions. Loud and fast, for hooks and hot takes.",
+  "signature": "",
+  "colors": {
+    "main": "#0B0B0B",
+    "alt": "#2B2BFF",
+    "text_on_main": "#FFFFFF",
+    "text_on_alt": "#FFFFFF",
+    "text_on_photo": "#FFFFFF",
+    "accent": "#FFD60A",
+    "accent_on_alt": "#FFD60A",
+    "shade": "#000000"
+  },
+  "fonts": {
+    "headline": {"family": "Inter", "weight": 900, "case": "upper", "tracking": -0.04, "line": 0.95},
+    "body": {"family": "Inter", "weight": 800}
+  },
+  "headline_size": 220,
+  "captions": {"size": 60, "y": 1400, "style": "outline", "case": "upper", "max_words": 3},
+  "transition": "zoom",
+  "motion": "snappy",
+  "marks": "clean",
+  "texture": "none",
+  "photos": "color",
+  "pace": "fast",
+  "sound": "on"
+}

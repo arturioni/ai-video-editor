@@ -1,0 +1,12 @@
+{
+  "name": "ai-video-editor",
+  "owner": { "name": "Artur Rioni" },
+  "metadata": { "description": "The AI Video Editor kit for Claude Code" },
+  "plugins": [
+    {
+      "name": "ai-video-editor",
+      "source": "./",
+      "description": "Make finished vertical reels from one line, in your own style, with a free local voice."
+    }
+  ]
+}
