@@ -13,7 +13,8 @@ Free to use. No accounts or keys. The voice is made on your computer, and nothin
 ## What you need
 
 - The Claude desktop app with Claude Code (a paid Claude plan).
-- A Mac (Windows should work but is less tested).
+- A Mac with macOS 13.5 (Ventura) or newer, Apple Silicon or Intel. Windows should work but is less tested.
+- English. The voices, the word timing and the captions only work in English for now.
 - About 2 GB of free space and an internet connection for the first setup.
 
 ## Set it up (once)
@@ -26,13 +27,15 @@ Free to use. No accounts or keys. The voice is made on your computer, and nothin
 Set up the AI Video Editor in this folder: download https://github.com/arturioni/ai-video-editor/archive/refs/heads/main.zip, unzip it, move everything inside the ai-video-editor-main folder (hidden files too) into this folder, delete the zip and the empty folder, then read .claude/skills/check-setup/SKILL.md and follow it to check my setup.
 ```
 
-Claude downloads the kit, then checks your setup and installs what's missing: the video renderer, ffmpeg, a voice and a speech model. The first time takes 5 to 15 minutes. It asks which voice you like (click the samples in `kit/voice-samples/` to hear them) and finishes by making a 3-second test reel.
+Claude downloads the kit, then checks your setup and installs what's missing: the video renderer, ffmpeg, a voice and a speech model. The first time takes 5 to 15 minutes. Claude asks before it runs a command or downloads something, so you'll see a few permission requests: click **Allow** each time. It asks which voice you like (click the samples in `kit/voice-samples/` to hear them) and finishes by making a 3-second test reel.
 
 ## Set up your look (once)
 
 Save 1 to 3 reels or screenshots whose look you like in **My References**, then say `set up my style`. Claude studies them and builds **My Style**: your colours, fonts (any Google font), caption look, transitions, pace and the @handle at the top, plus how your scripts should sound (who they're for, how you talk, how you end). It shows you a preview and changes whatever you say.
 
-No references? Pick a starter look instead (previews in `kit/styles/`): **Clean** (white, calm, blue accent), **Bold** (black, huge capitals, yellow) or **Soft** (pale blue, hand-drawn marks, gentle fades). Change it any time: `use my brand colours`, `bigger captions`, `use a serif font`.
+No references? Pick a starter look instead (previews in `kit/styles/`): **Clean** (white, calm, blue accent), **Bold** (black, huge capitals, yellow) or **Soft** (pale blue, hand-drawn marks, gentle fades). Clean and Bold get soft whooshes and clicks; Soft gets paper and pen sounds.
+
+There's also an optional fourth starter, **Artur's look**: the look of the reels this kit came from (charcoal, one orange accent, heavy capitals, serif captions, hand-drawn marks, grain, black-and-white photos, paper sounds). Say `use Artur's look` to start from it, then make it yours. Change it any time: `use my brand colours`, `bigger captions`, `use a serif font`.
 
 ## Make a reel
 
@@ -79,7 +82,7 @@ Type `check my setup`. It finds the problem and fixes it, or tells you in plain 
 
 ## What gets downloaded
 
-On the first setup: `uv` (runs the kit's own Python), the HyperFrames renderer and a headless Chrome, a voice model (Kokoro, about 340 MB), a speech-to-text model (faster-whisper, about 145 MB), and Node.js and ffmpeg if your computer doesn't have them. They live in this folder or in the usual download caches in your home folder. Pictures come from Openverse and Wikimedia Commons, public domain and CC0 only.
+On the first setup: `uv` (runs the kit's own Python), the HyperFrames renderer and a headless Chrome, a voice model (Kokoro, about 340 MB), a speech-to-text model (faster-whisper, about 145 MB), and Node.js and ffmpeg if your computer doesn't have them. The first time you edit a video of yourself talking, a larger speech model downloads too (about 480 MB), because it hears real speech better. They live in this folder or in the usual download caches in your home folder. Pictures come from Openverse and Wikimedia Commons, public domain and CC0 only.
 
 ## Install as a Claude Code plugin instead
 
@@ -87,4 +90,4 @@ If you'd rather have the skills in every folder: `/plugin marketplace add arturi
 
 ## Credits
 
-Built on [HyperFrames](https://github.com/heygen-com/hyperframes) (HTML to video), [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M) (voice) and [faster-whisper](https://github.com/SYSTRAN/faster-whisper) (word timing). Sound effects from Freesound (CC0), Inter under the SIL Open Font License: see `CREDITS.md`. MIT licence (`LICENSE`).
+Built on [HyperFrames](https://github.com/heygen-com/hyperframes) (HTML to video), [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M) (voice) and [faster-whisper](https://github.com/SYSTRAN/faster-whisper) (word timing). Animation by [GSAP](https://gsap.com) (included, under its free standard licence), sound effects from Freesound (CC0), Inter under the SIL Open Font License: see `CREDITS.md`. MIT licence (`LICENSE`).

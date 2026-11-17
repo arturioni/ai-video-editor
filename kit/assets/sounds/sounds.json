@@ -1,187 +1,328 @@
 {
- "about": "The kit's paper sounds. Each clip is mono, 48 kHz, already cut, faded and set to its level (paper peaks at -12 dBFS, key clicks at -14; hit is two sounds layered and peaks a little lower). mix.py plays the clips of a label in the order listed, one per event, and starts again from the top when the list runs out. gain_db is added on top of the clip's level. nudge (seconds) moves the start: negative means the clip starts that much before the event, so its audible start lands on the event.",
+ "about": "The kit's sound effects, in two sets with the same labels. reel.py picks the set from the look's \"sound\" key (soft, paper or off; kitpaths.sound_set) and writes it into timing.json; mix.py plays that set. Each clip is mono, 48 kHz, already cut, faded and set to its level. mix.py plays the clips of a label in the order listed, one per event, and starts again from the top when the list runs out. gain_db is added on top of the clip's level. nudge (seconds) moves the start: negative means the clip starts that much before the event, so its audible start (or a whoosh's peak) lands on the moment.",
  "sample_rate": 48000,
- "labels": {
-  "land": {
-   "what": "words or a picture arriving",
-   "rotate": true,
-   "clips": [
-    {
-     "clip": "land-1.flac",
-     "gain_db": -2.0,
-     "nudge": -0.033
+ "sets": {
+  "soft": {
+   "what": "soft whooshes and clicks, for clean looks (the Clean and Bold starters). High-passed, then whooshes peak at -12 dBFS and the click at -14; each label plays at the same momentary loudness as the paper set's, so the balance with the voice is the same. key reuses key-2.flac, a computer keyboard key.",
+   "labels": {
+    "land": {
+     "what": "words or a picture arriving: a soft click",
+     "rotate": true,
+     "clips": [
+      {
+       "clip": "click.flac",
+       "gain_db": 3.4,
+       "nudge": -0.031
+      },
+      {
+       "clip": "click.flac",
+       "gain_db": 0.9,
+       "nudge": -0.031
+      },
+      {
+       "clip": "click.flac",
+       "gain_db": 2.2,
+       "nudge": -0.031
+      }
+     ]
     },
-    {
-     "clip": "land-2.flac",
-     "gain_db": -5.0,
-     "nudge": -0.087
+    "scribble": {
+     "what": "a quick line being drawn: a short soft swish",
+     "rotate": false,
+     "clips": [
+      {
+       "clip": "whoosh-2.flac",
+       "gain_db": -4.9,
+       "nudge": -0.156
+      }
+     ]
     },
-    {
-     "clip": "land-3.flac",
-     "gain_db": -5.0,
-     "nudge": -0.106
+    "cut": {
+     "what": "a very light swish on a hard cut",
+     "rotate": true,
+     "clips": [
+      {
+       "clip": "whoosh-2.flac",
+       "gain_db": -10.7,
+       "nudge": -0.226
+      },
+      {
+       "clip": "whoosh-1.flac",
+       "gain_db": -12.0,
+       "nudge": -0.321
+      },
+      {
+       "clip": "whoosh-3.flac",
+       "gain_db": -13.3,
+       "nudge": -0.245
+      }
+     ]
+    },
+    "key": {
+     "what": "one keyboard key; the uneven levels keep typing from sounding like a machine",
+     "rotate": true,
+     "clips": [
+      {
+       "clip": "key-2.flac",
+       "gain_db": -10.5,
+       "nudge": -0.035
+      },
+      {
+       "clip": "click.flac",
+       "gain_db": -10.3,
+       "nudge": -0.031
+      },
+      {
+       "clip": "key-2.flac",
+       "gain_db": -12.5,
+       "nudge": -0.035
+      },
+      {
+       "clip": "click.flac",
+       "gain_db": -8.3,
+       "nudge": -0.031
+      },
+      {
+       "clip": "key-2.flac",
+       "gain_db": -14.5,
+       "nudge": -0.035
+      },
+      {
+       "clip": "click.flac",
+       "gain_db": -9.8,
+       "nudge": -0.031
+      },
+      {
+       "clip": "key-2.flac",
+       "gain_db": -11.5,
+       "nudge": -0.035
+      },
+      {
+       "clip": "click.flac",
+       "gain_db": -10.8,
+       "nudge": -0.031
+      }
+     ]
+    },
+    "whoosh": {
+     "what": "a soft air whoosh on a transition into a new scene",
+     "rotate": true,
+     "clips": [
+      {
+       "clip": "whoosh-1.flac",
+       "gain_db": -3.0,
+       "nudge": -0.231
+      },
+      {
+       "clip": "whoosh-2.flac",
+       "gain_db": -2.7,
+       "nudge": -0.136
+      },
+      {
+       "clip": "whoosh-3.flac",
+       "gain_db": -3.8,
+       "nudge": -0.155
+      }
+     ]
+    },
+    "hit": {
+     "what": "a full-screen accent moment (takeover): a strong whoosh landing on a click",
+     "rotate": false,
+     "clips": [
+      {
+       "clip": "whoosh-hit.flac",
+       "gain_db": -3.4,
+       "nudge": -0.231
+      }
+     ]
     }
-   ]
+   }
   },
-  "scribble": {
-   "what": "a quick pen stroke",
-   "rotate": false,
-   "clips": [
-    {
-     "clip": "scribble.flac",
-     "gain_db": -4.0,
-     "nudge": 0.0
+  "paper": {
+   "what": "paper, pen and typewriter sounds, for hand-drawn looks (the Soft starter). Paper peaks at -12 dBFS, key clicks at -14; hit is two sounds layered and peaks a little lower.",
+   "labels": {
+    "land": {
+     "what": "words or a picture arriving",
+     "rotate": true,
+     "clips": [
+      {
+       "clip": "land-1.flac",
+       "gain_db": -2.0,
+       "nudge": -0.033
+      },
+      {
+       "clip": "land-2.flac",
+       "gain_db": -5.0,
+       "nudge": -0.087
+      },
+      {
+       "clip": "land-3.flac",
+       "gain_db": -5.0,
+       "nudge": -0.106
+      }
+     ]
+    },
+    "scribble": {
+     "what": "a quick pen stroke",
+     "rotate": false,
+     "clips": [
+      {
+       "clip": "scribble.flac",
+       "gain_db": -4.0,
+       "nudge": 0.0
+      }
+     ]
+    },
+    "cut": {
+     "what": "a very light slide on a hard cut",
+     "rotate": true,
+     "clips": [
+      {
+       "clip": "slide-1.flac",
+       "gain_db": -11.0,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-6.flac",
+       "gain_db": -12.7,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-5.flac",
+       "gain_db": -14.7,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-4.flac",
+       "gain_db": -11.2,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-3.flac",
+       "gain_db": -16.8,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-2.flac",
+       "gain_db": -10.5,
+       "nudge": 0.0
+      }
+     ]
+    },
+    "key": {
+     "what": "one typewriter key; the uneven levels keep typing from sounding like a machine",
+     "rotate": true,
+     "clips": [
+      {
+       "clip": "key-2.flac",
+       "gain_db": -4.5,
+       "nudge": -0.0
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -7.3,
+       "nudge": -0.011
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -6.2,
+       "nudge": -0.011
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -5.6,
+       "nudge": -0.011
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -5.5,
+       "nudge": -0.011
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -5.6,
+       "nudge": -0.011
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -5.9,
+       "nudge": -0.011
+      },
+      {
+       "clip": "key-2.flac",
+       "gain_db": -5.4,
+       "nudge": -0.0
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -5.2,
+       "nudge": -0.011
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -7.7,
+       "nudge": -0.011
+      },
+      {
+       "clip": "key-2.flac",
+       "gain_db": -7.7,
+       "nudge": -0.0
+      },
+      {
+       "clip": "key-1.flac",
+       "gain_db": -4.3,
+       "nudge": -0.011
+      }
+     ]
+    },
+    "whoosh": {
+     "what": "a soft paper swish on a transition into a new scene",
+     "rotate": true,
+     "clips": [
+      {
+       "clip": "slide-2.flac",
+       "gain_db": -2.5,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-3.flac",
+       "gain_db": -8.8,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-4.flac",
+       "gain_db": -3.2,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-5.flac",
+       "gain_db": -6.7,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-6.flac",
+       "gain_db": -4.7,
+       "nudge": 0.0
+      },
+      {
+       "clip": "slide-1.flac",
+       "gain_db": -3.0,
+       "nudge": 0.0
+      }
+     ]
+    },
+    "hit": {
+     "what": "a full-screen accent moment (takeover)",
+     "rotate": false,
+     "clips": [
+      {
+       "clip": "hit.flac",
+       "gain_db": 0.0,
+       "nudge": -0.054
+      }
+     ]
     }
-   ]
-  },
-  "cut": {
-   "what": "a very light slide on a hard cut",
-   "rotate": true,
-   "clips": [
-    {
-     "clip": "slide-1.flac",
-     "gain_db": -11.0,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-6.flac",
-     "gain_db": -12.7,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-5.flac",
-     "gain_db": -14.7,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-4.flac",
-     "gain_db": -11.2,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-3.flac",
-     "gain_db": -16.8,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-2.flac",
-     "gain_db": -10.5,
-     "nudge": 0.0
-    }
-   ]
-  },
-  "key": {
-   "what": "one typewriter key; the uneven levels keep typing from sounding like a machine",
-   "rotate": true,
-   "clips": [
-    {
-     "clip": "key-2.flac",
-     "gain_db": -4.5,
-     "nudge": -0.0
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -7.3,
-     "nudge": -0.011
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -6.2,
-     "nudge": -0.011
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -5.6,
-     "nudge": -0.011
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -5.5,
-     "nudge": -0.011
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -5.6,
-     "nudge": -0.011
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -5.9,
-     "nudge": -0.011
-    },
-    {
-     "clip": "key-2.flac",
-     "gain_db": -5.4,
-     "nudge": -0.0
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -5.2,
-     "nudge": -0.011
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -7.7,
-     "nudge": -0.011
-    },
-    {
-     "clip": "key-2.flac",
-     "gain_db": -7.7,
-     "nudge": -0.0
-    },
-    {
-     "clip": "key-1.flac",
-     "gain_db": -4.3,
-     "nudge": -0.011
-    }
-   ]
-  },
-  "whoosh": {
-   "what": "a soft paper swish on a transition into a new scene",
-   "rotate": true,
-   "clips": [
-    {
-     "clip": "slide-2.flac",
-     "gain_db": -2.5,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-3.flac",
-     "gain_db": -8.8,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-4.flac",
-     "gain_db": -3.2,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-5.flac",
-     "gain_db": -6.7,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-6.flac",
-     "gain_db": -4.7,
-     "nudge": 0.0
-    },
-    {
-     "clip": "slide-1.flac",
-     "gain_db": -3.0,
-     "nudge": 0.0
-    }
-   ]
-  },
-  "hit": {
-   "what": "a full-screen accent moment (takeover)",
-   "rotate": false,
-   "clips": [
-    {
-     "clip": "hit.flac",
-     "gain_db": 0.0,
-     "nudge": -0.054
-    }
-   ]
+   }
   }
  }
 }

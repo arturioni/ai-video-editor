@@ -1,6 +1,6 @@
 # Checking your own work
 
-"It checks its own motion before you see it." You can't watch the video, but you can look at frames, and the frames that matter are known: every cut, every caption, every mark landing, every tear. `check` snapshots exactly those.
+"It checks its own motion before you see it." You can't watch the video, but you can look at frames, and the frames that matter are known: every cut, every caption, every mark landing, every transition. `check` snapshots exactly those.
 
 ```
 uv run --project kit kit/run.py check <reel>                 lint + every moment that matters, on labelled sheets

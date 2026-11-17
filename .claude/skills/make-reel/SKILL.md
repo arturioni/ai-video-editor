@@ -86,7 +86,7 @@ uv run --project kit kit/run.py final airplane-food
 uv run --project kit kit/run.py finish airplane-food
 ```
 
-`sound` mixes the voice with light paper-and-pen sound effects on transitions, arrivals and marks (or none, if their style says `"sound": "off"`), at a steady loudness for phones. There's no music: people add a trending song in the app when they post. `final` makes a one-frame-a-second contact sheet and prints the length and loudness: open the sheet and confirm nothing broke in the render. `finish` copies it to `Finished Reels/` (a new version never overwrites an old one) with a credits file for the photos.
+`sound` mixes the voice with light sound effects on transitions, arrivals and marks: soft whooshes and clicks, or paper and pen for hand-drawn looks (their style's `"sound"`: `soft`, `paper` or `off`), at a steady loudness for phones. There's no music: people add a trending song in the app when they post. `final` makes a one-frame-a-second contact sheet and prints the length and loudness: open the sheet and confirm nothing broke in the render. `finish` copies it to `Finished Reels/` (a new version never overwrites an old one) with a credits file for the photos.
 
 ## 9. Hand it over
 

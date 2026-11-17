@@ -1,17 +1,20 @@
-"""The sound pass: the voice plus the paper sounds, mixed onto the finished picture.
+"""The sound pass: the voice plus the sound effects, mixed onto the finished picture.
 
 usage: uv run --project kit kit/run.py sound <reel>
 
 Reads, inside work/<reel>/renders/:
   <reel>-silent.mp4      the render (its picture is copied untouched)
   voice.timed.wav        the voiceover, already on the reel's timing
-  project/timing.json    {"total": seconds, ...}
+  project/timing.json    {"total": seconds, "sounds": "soft" | "paper" | "off", ...}
   sound/events.json      [{"t": seconds, "label": "whoosh"}, ...]   (optional: without it the reel gets the voice only)
 
-Writes renders/<reel>.mp4 (and renders/sound/effects.wav, the paper sounds on their own).
+Writes renders/<reel>.mp4 (and renders/sound/effects.wav, the sound effects on their own).
 
-How it is mixed: the voice is brought to -17 LUFS; every event plays the next clip of its label from
-kit/assets/sounds/sounds.json, at that clip's level and start offset; the paper sounds dip a little while the voice
+Which effects: the set the build chose for the reel's look (timing.json "sounds"): "soft" whooshes and clicks for
+clean looks, "paper" and pen for hand-drawn ones (kitpaths.sound_set), or none.
+
+How it is mixed: the voice is brought to -17 LUFS; every event plays the next clip of its label from that set in
+kit/assets/sounds/sounds.json, at that clip's level and start offset; the effects dip a little while the voice
 speaks; the whole mix is then set to -14 LUFS with its peaks held near -1.5 dBTP, and the finished file is measured.
 There is no music on purpose: the song is added in the app when the reel is posted.
 """
@@ -24,11 +27,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import kitpaths
 
 SR = 48000
-VOICE_LUFS = -17.0        # the voice sits here before the mix; without it the paper comes out 3 to 5 dB too loud
+VOICE_LUFS = -17.0        # the voice sits here before the mix; without it the effects come out 3 to 5 dB too loud
 MIX_LUFS = -14.0          # what Instagram, TikTok and Shorts play at
 CEILING_DBTP = -1.5       # true-peak ceiling of the finished file
 AAC_HEADROOM = 0.7        # the AAC encoder throws peaks up to about this far over what it was given
-DUCK = "threshold=0.05:ratio=2:attack=8:release=160"       # light: the paper stays heard under the voice
+DUCK = "threshold=0.05:ratio=2:attack=8:release=160"       # light: the effects stay heard under the voice
 SOUNDS = os.path.join(kitpaths.ASSETS, "sounds")
 USAGE = "usage: uv run --project kit kit/run.py sound <reel>"
 
@@ -72,11 +75,15 @@ def video_length(path):
         return kitpaths.duration(path)
 
 
-def load_sounds():
+def load_sounds(which):
+    """the labels of one sound set ("soft" or "paper") from sounds.json"""
     path = os.path.join(SOUNDS, "sounds.json")
     if not os.path.exists(path):
         sys.exit("The kit's sounds are missing (kit/assets/sounds/sounds.json). Download the kit again, or restore that folder.")
-    return json.load(open(path, encoding="utf-8"))["labels"]
+    sets = json.load(open(path, encoding="utf-8"))["sets"]
+    if which not in sets:
+        sys.exit(f"The kit has no sound set called {which!r}. Sets: {', '.join(sets)}. Change \"sound\" in My Style/style.json.")
+    return sets[which]["labels"]
 
 
 def load_events(path):
@@ -145,7 +152,7 @@ def effects_bus(events, labels, dur):
 
 
 def premix(voice, voice_gain, fx, dur, out):
-    """voice (raised, padded to the reel's length) + the paper sounds dipping under it -> one unmastered wav"""
+    """voice (raised, padded to the reel's length) + the effects dipping under it -> one unmastered wav"""
     # ffmpeg's own mono -> stereo takes 3 dB off, so a mono voice is copied to both sides by hand
     to_stereo = "pan=stereo|c0=c0|c1=c0" if probe(voice, "a:0", "channels") == "1" else "aformat=channel_layouts=stereo"
     v = f"[0:a]aresample={SR},{to_stereo},volume={voice_gain:.2f}dB,apad=whole_dur={dur:.3f},atrim=end={dur:.3f}"
@@ -183,25 +190,33 @@ def main(argv):
     if not os.path.exists(voice):
         sys.exit(f"There's no voice yet for {slug} (renders/voice.timed.wav). Make the voice first, then run the sound step.")
     dur = video_length(video)
+    which = None
     if os.path.exists(timing):
         try:
-            total = float(json.load(open(timing, encoding="utf-8"))["total"])
+            tj = json.load(open(timing, encoding="utf-8"))
+            which = tj.get("sounds")
+            total = float(tj["total"])
             if abs(total - dur) > 0.25:
                 print(f"note: timing.json says {total:.2f}s but the render is {dur:.2f}s long; the sound follows the render")
-        except (ValueError, KeyError, TypeError):
+        except (ValueError, KeyError, TypeError, AttributeError):
             print("warning: project/timing.json has no readable \"total\"; the sound follows the render's length", file=sys.stderr)
     else:
         print("warning: no project/timing.json; the sound follows the render's length", file=sys.stderr)
+    if which is None:                                # built before sound sets existed: go by the current look
+        which = kitpaths.sound_set() or "off"
 
     sdir = os.path.join(r, "sound")
     os.makedirs(sdir, exist_ok=True)
-    labels = load_sounds()
-    bus, placed = effects_bus(load_events(os.path.join(sdir, "events.json")), labels, dur)
+    if which == "off":
+        labels, events = {}, []
+    else:
+        labels, events = load_sounds(which), load_events(os.path.join(sdir, "events.json"))
+    bus, placed = effects_bus(events, labels, dur)
     fx = None
     if placed:
         fx = os.path.join(sdir, "effects.wav")
         sf.write(fx, np.column_stack([bus, bus]), SR, subtype="PCM_24")
-        print("sounds placed: " + ", ".join(f"{placed[k]} {k}" for k in labels if k in placed))
+        print(f"{which} sounds placed: " + ", ".join(f"{placed[k]} {k}" for k in labels if k in placed))
 
     v_lufs, _ = measure(voice)
     if v_lufs is None:

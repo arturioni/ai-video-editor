@@ -105,7 +105,7 @@ The worked example `kit/examples/airplane-food/scenes.py` does all three; copy i
 
 ## Sound
 
-Transitions, arrivals (`stamp`, `stack`, `count`, `stamp_words`), strikes, circles, doodles, the takeover and typing add their own light paper-and-pen sounds; plain cuts get a very light one. Add more with `sound("land", t)`; labels: land, hit, scribble, key, whoosh, cut. A style with `"sound": "off"` has none.
+Transitions, arrivals (`stamp`, `stack`, `count`, `stamp_words`), strikes, circles, doodles, the takeover and typing add their own light sounds; plain cuts get a very light one. Add more with `sound("land", t)`; labels: land, hit, scribble, key, whoosh, cut. The style's `"sound"` picks the set: `soft` (whooshes and clicks), `paper` (paper and pen, for hand-drawn looks) or `off` (none).
 
 ## When the build says
 

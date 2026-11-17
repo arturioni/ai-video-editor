@@ -1,0 +1,28 @@
+{
+  "name": "Artur Rioni",
+  "about": "Optional: the look of Artur Rioni's (@arturrioni) reels. Charcoal, one orange accent, heavy capitals, serif captions, hand-drawn chalk marks, film grain, black-and-white photos. A starting point to make your own: add your handle with style set signature=@you.",
+  "signature": "",
+  "colors": {
+    "main": "#211F1D",
+    "alt": "#F4F0E6",
+    "text_on_main": "#EFE7DC",
+    "text_on_alt": "#211F1D",
+    "text_on_photo": "#FFFFFF",
+    "accent": "#E85A2A",
+    "accent_on_alt": "#C94A1E",
+    "shade": "#000000"
+  },
+  "fonts": {
+    "headline": {"family": "Inter", "weight": 900, "case": "upper", "tracking": -0.04, "line": 0.95},
+    "body": {"family": "Cormorant Garamond", "weight": 700}
+  },
+  "headline_size": 210,
+  "captions": {"size": 66, "y": 1455, "style": "shadow", "case": "sentence", "max_words": 4},
+  "transition": "wipe",
+  "motion": "snappy",
+  "marks": "hand",
+  "texture": "grain",
+  "photos": "bw",
+  "pace": "fast",
+  "sound": "paper"
+}

@@ -7,7 +7,7 @@ This folder makes finished vertical reels (1080x1920) with Claude: script, voice
 | They say | Use |
 |---|---|
 | "check my setup", "it's not working" | the `check-setup` skill |
-| "set up my style", "make it look like this", "change my colours" | the `set-up-my-style` skill |
+| "set up my style", "make it look like this", "change my colours", "use Artur's look" | the `set-up-my-style` skill |
 | "make a reel about ...", or feedback on a reel | the `make-reel` skill |
 | "remake this reel", a pasted transcript, "why did this work" | the `remake-reel` skill |
 | "edit this video" (footage of themselves talking) | the `edit-talking-head` skill |
@@ -28,5 +28,6 @@ The skills are in `.claude/skills/`. If they don't seem to be loaded (for exampl
 
 - Run everything through `uv run --project kit kit/run.py <step>` from this folder (`kit/run.py help` lists the steps). It uses the kit's own Python and tools, so don't install Python packages or call system Python.
 - You can't hear audio. Say so, and let the user judge the voice and sound.
+- The kit works in English only for now (voices, word timing, captions and fonts). If they ask for another language, say so plainly instead of trying.
 - Never post or upload anything for them, and never download videos or music from Instagram, TikTok or YouTube.
 - No keys or passwords in chat or in files here.

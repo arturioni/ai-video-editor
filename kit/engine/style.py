@@ -1,7 +1,7 @@
 """The user's own look: My Style/style.json (what the engine reads), style.md and voice.md (what Claude reads).
 
 usage: run.py style list                         the starter looks
-       run.py style start <clean|bold|soft>      copy a starter into My Style/ to make it yours
+       run.py style start <clean|bold|soft|artur>   copy a starter into My Style/ to make it yours (artur: optional, Artur Rioni's own look)
        run.py style show                         the current look, with contrast checks
        run.py style set key=value ...            e.g. colors.accent=#FF3366 transition=zoom captions.style=box signature=@me
        run.py style font "<Google font>" [--for headline|body|both] [--weight 800]
@@ -12,7 +12,8 @@ Keys you can set: signature, colors.main, colors.alt, colors.text_on_main, color
 colors.accent, colors.accent_on_alt, colors.shade, fonts.headline.family/weight/case/tracking/line,
 fonts.body.family/weight, headline_size, captions.size/y/style/box/box_text/case/max_words,
 transition (cut slide zoom fade wipe flash), motion (snappy smooth), marks (hand clean), texture (none grain),
-photos (color bw duotone), pace (calm normal fast), sound (on off).
+photos (color bw duotone), pace (calm normal fast),
+sound (soft: whooshes and clicks; paper: paper and pen, for hand-drawn looks; off: none).
 """
 import json, os, re, shutil, subprocess, sys, urllib.request
 import numpy as np
@@ -21,7 +22,7 @@ import kitpaths
 STYLE_JSON = os.path.join(kitpaths.MY_STYLE, "style.json")
 CHOICES = {"transition": ("cut", "slide", "zoom", "fade", "wipe", "flash"), "motion": ("snappy", "smooth"),
            "marks": ("hand", "clean"), "texture": ("none", "grain"), "photos": ("color", "bw", "duotone"),
-           "pace": ("calm", "normal", "fast"), "sound": ("on", "off"), "captions.style": ("box", "shadow", "plain", "outline"),
+           "pace": ("calm", "normal", "fast"), "sound": ("soft", "paper", "off", "on"), "captions.style": ("box", "shadow", "plain", "outline"),
            "captions.case": ("sentence", "upper", "lower"), "fonts.headline.case": ("none", "upper", "lower")}
 BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
@@ -71,7 +72,7 @@ How the scripts should sound. Claude reads this before writing any reel.
 
 def _load():
     if not os.path.exists(STYLE_JSON):
-        sys.exit("There's no My Style yet. Start from a starter look: kit/run.py style start clean (or bold, soft)")
+        sys.exit("There's no My Style yet. Start from a starter look: kit/run.py style start clean (or bold, soft, artur)")
     return json.load(open(STYLE_JSON, encoding="utf-8"))
 
 
@@ -98,7 +99,7 @@ def list_(argv):
 
 def start(argv):
     if not argv:
-        sys.exit("usage: run.py style start <clean|bold|soft>")
+        sys.exit("usage: run.py style start <clean|bold|soft|artur>")
     name = argv[0].lower()
     presets = _presets()
     if name not in presets:
@@ -110,6 +111,13 @@ def start(argv):
     s = presets[name]
     s["based_on"] = name
     _save(s)
+    pf = os.path.join(kitpaths.STYLES, name, "fonts")       # a starter's own fonts (and their licences) come along
+    if os.path.isdir(pf):
+        d = os.path.join(kitpaths.MY_STYLE, "fonts")
+        os.makedirs(d, exist_ok=True)
+        for f in os.listdir(pf):
+            shutil.copy2(os.path.join(pf, f), os.path.join(d, f))
+        _fonts_css()
     for fname, text in (("style.md", STYLE_MD), ("voice.md", VOICE_MD)):
         p = os.path.join(kitpaths.MY_STYLE, fname)
         if not os.path.exists(p):
@@ -158,14 +166,14 @@ def check(s):
 def show(argv):
     s, own = kitpaths.style()
     if not own:
-        print("No My Style yet: reels use the neutral Clean starter. Run: kit/run.py style start <clean|bold|soft>")
+        print("No My Style yet: reels use the neutral Clean starter. Run: kit/run.py style start <clean|bold|soft|artur>")
     c, h, b, cap = s["colors"], s["fonts"]["headline"], s["fonts"]["body"], s["captions"]
     print(f"{s.get('name', 'My style')} (based on {s.get('based_on', 'clean')})")
     print(f"  colours: main {c['main']}, alt {c['alt']}, text {c['text_on_main']} / {c['text_on_alt']}, accent {c['accent']}")
     print(f"  headline: {h['family']} {h.get('weight')} {h.get('case', 'none')} case, size {s.get('headline_size')}")
     print(f"  captions: {b['family']} {b.get('weight')}, {cap.get('size')} px at y={cap.get('y')}, {cap.get('style')}, {cap.get('case')} case")
     print(f"  transition {s.get('transition')}, motion {s.get('motion')}, marks {s.get('marks')}, texture {s.get('texture')}, "
-          f"photos {s.get('photos')}, pace {s.get('pace')}, sound {s.get('sound')}, signature {s.get('signature') or '(none)'}")
+          f"photos {s.get('photos')}, pace {s.get('pace')}, sound {kitpaths.sound_set(s) or 'off'}, signature {s.get('signature') or '(none)'}")
     for w in check(s):
         print("check:", w)
 

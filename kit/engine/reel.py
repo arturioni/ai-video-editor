@@ -72,6 +72,7 @@ def _make_project():
     shutil.copy(os.path.join(kitpaths.KIT, "hyperframes.json"), project())
     shutil.copytree(os.path.join(kitpaths.ASSETS, "fonts"), project("assets/fonts"), dirs_exist_ok=True)
     shutil.copy(os.path.join(kitpaths.ASSETS, "grain.png"), project("assets/grain.png"))
+    shutil.copy(os.path.join(kitpaths.ASSETS, "gsap.min.js"), project("assets/gsap.min.js"))   # bundled: renders need no CDN
     user_fonts = os.path.join(kitpaths.MY_STYLE, "fonts")
     if OWN_STYLE and os.path.isdir(user_fonts):
         shutil.copytree(user_fonts, project("assets/userfonts"), dirs_exist_ok=True)
@@ -505,7 +506,7 @@ def finish(events=None, under="", sig_notes=(), cut_sounds="auto"):
   {_caption_html()}{"".join(rootcaps)}
   {grain}
 </div>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script src="assets/gsap.min.js"></script>
 <script>
 const tl = gsap.timeline({{ paused: true }});
 {chr(10).join(tl)}
@@ -522,12 +523,13 @@ window.__timelines["main"] = tl;
     cuts = plain if cut_sounds == "auto" else list(cut_sounds)
     ev = (EVENTS + list(events or []) + [{"t": round(t - 0.06, 3), "label": "whoosh"} for t in MOVES]
           + [{"t": round(T[k] - 0.05, 3), "label": "cut"} for k in cuts])
-    if ST.get("sound", "on") == "off":
+    sounds = kitpaths.sound_set(ST)                  # which set mix.py plays: "soft", "paper", or None for no effects
+    if sounds is None:
         ev = []
     with open(os.path.join(_R.dir, "renders", "sound", "events.json"), "w") as f:
         json.dump(sorted(ev, key=lambda e: e["t"]), f, indent=0)
 
-    timing = {"reel": _R.slug, "style": ST.get("name", ""), "total": TOTAL, "voice_length": round(_R.voice_len, 3), "tempo": _R.tempo,
+    timing = {"reel": _R.slug, "style": ST.get("name", ""), "sounds": sounds or "off", "total": TOTAL, "voice_length": round(_R.voice_len, 3), "tempo": _R.tempo,
               "cuts": {k: float(T[k]) for k, _, _ in _R.lines}, "how": {k: how for k, _, how in _R.lines},
               "moves": [round(t, 3) for t in MOVES],
               "line_starts": {k: round(S[first[k]], 3) for k, _, _ in _R.lines},

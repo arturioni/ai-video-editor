@@ -81,7 +81,7 @@ def finish(d):
         data = pictures._read_credits(credits)
         if data:
             text = "Pictures\n" + "\n".join(f"{slot}: {pictures._line(data[slot])}" for slot in sorted(data))
-            text += "\n\nPaper sounds: Freesound, CC0 (see kit/assets/sounds/CREDITS.md)\n"
+            text += "\n\nSound effects: Freesound, CC0 (see kit/assets/sounds/CREDITS.md)\n"
             open(out[:-4] + " - credits.txt", "w", encoding="utf-8").write(text)
     print(f"finished: {out}")
     return out
@@ -93,7 +93,7 @@ SKIP_DIRS = {".venv", "tools", "__pycache__", ".git", "node_modules", ".hyperfra
 def count(argv=()):
     """the files that ship with the kit: no reels, renders, downloads or caches"""
     n, by = 0, {}
-    user_dirs = ("work", "Finished Reels", "My Photos", "My Footage")
+    user_dirs = ("work", "Finished Reels", "My Photos", "My Footage", "My Style", "My References")
     for top, dirs, files in os.walk(kitpaths.ROOT):
         rel = os.path.relpath(top, kitpaths.ROOT)
         user = rel.split(os.sep)[0] in user_dirs

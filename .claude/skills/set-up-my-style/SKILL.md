@@ -1,6 +1,6 @@
 ---
 name: set-up-my-style
-description: Set up or change the look and voice of the user's reels - colours, fonts, captions, transitions, photo treatment, pace, signature, and how the scripts sound - from reels or screenshots they like, or from a starter look. Use when the user says "set up my style", "make it look like this", "here are reels I like", "change my colours/font/captions", "use my brand", "it doesn't look like me", or during first setup, even if they don't name the skill.
+description: Set up or change the look and voice of the user's reels - colours, fonts, captions, transitions, photo treatment, pace, signature, and how the scripts sound - from reels or screenshots they like, or from a starter look. Use when the user says "set up my style", "make it look like this", "here are reels I like", "change my colours/font/captions", "use my brand", "it doesn't look like me", "use Artur's look", "make it look like the reel", or during first setup, even if they don't name the skill.
 ---
 
 # Set up my style
@@ -26,7 +26,7 @@ In one message, plainly:
 3. "Your @handle for the top of each reel, or none?"
 4. "Who are your reels for, and how do you talk to them?" (for `voice.md`)
 
-If they'd rather not bother, offer the three starter looks with their previews (`kit/styles/clean/preview.jpg`, `bold`, `soft`; `style list` describes them) and let them pick. Set it with `style start <name>`, add the handle, done.
+If they'd rather not bother, offer the three starter looks with their previews (`kit/styles/clean/preview.jpg`, `bold`, `soft`; `style list` describes them) and let them pick. There's a fourth, optional one, `artur`: Artur Rioni's own look (charcoal, orange, serif captions, hand marks, grain), the look of the reels that shared this kit. Offer it when they say they want "the look from the reel", and say plainly whose look it is. Set it with `style start <name>`, add the handle, done.
 
 ## 2. Study the references
 
@@ -42,6 +42,7 @@ Write down, for the set of references together:
 - **Captions:** where they sit, size, box or shadow or outline, how many words at a time, caps or sentence case.
 - **Movement:** cuts or transitions (slide, zoom, fade, wipe, flash), snappy or smooth arrivals, how busy.
 - **Extras:** hand-drawn marks or clean lines, grain, photos in colour or black and white or duotone.
+- **Sound effects:** soft whooshes and clicks (`sound=soft`, for clean looks) or paper and pen (`sound=paper`, for hand-drawn looks), or none (`sound=off`).
 - **Pace:** calm, normal or fast talking.
 
 Borrow the feel, not the identity: never copy someone's logo, mascot, watermark, exact layout or catchphrases. Mixing two or three references is better than cloning one.
@@ -52,7 +53,8 @@ Borrow the feel, not the identity: never copy someone's logo, mascot, watermark,
 2. Fonts: `style font "<Google font>" --for headline --weight 800`, and again `--for body` if the captions use a different one.
 3. Everything else with `style set`, e.g.
    `style set colors.main=#101418 colors.alt=#F2EFE9 colors.text_on_main=#FFFFFF colors.text_on_alt=#101418 colors.accent=#FF3B6B colors.accent_on_alt=#D81E5B`
-   `style set captions.style=box captions.case=upper captions.max_words=3 transition=wipe motion=snappy marks=clean photos=bw pace=fast signature=@handle name="My style"`
+   `style set captions.style=box captions.case=upper captions.max_words=3 transition=wipe motion=snappy marks=clean photos=bw pace=fast sound=soft signature=@handle name="My style"`
+   If you switch to `marks=hand`, set `sound=paper` too, so the sounds match the hand-drawn look.
    Set `accent_on_alt` whenever you change the accent, so it reads on both grounds.
 4. `style show` prints the look and warns about colours that are hard to read. Fix every warning.
 5. Fill in `My Style/style.md` (the look in one line, each reference and what was borrowed from it, a short do and don't list) and `My Style/voice.md` (audience, tone, words, how reels end). Keep both short and in plain words.

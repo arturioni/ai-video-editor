@@ -9,7 +9,17 @@ dependencies = [
     "soundfile>=0.12",
     "faster-whisper>=1.1",
     "static-ffmpeg>=2.5",
+    # Held below the releases that dropped Intel Macs and macOS 13 (onnxruntime 1.24, PyAV 16), so the kit
+    # installs on any Mac from macOS 13 on, Intel or Apple Silicon. Raise them only if those wheels come back.
+    "onnxruntime>=1.20.1,<1.24",
+    "av>=11,<16",
 ]
 
 [tool.uv]
 package = false
+# uv lock fails if any package has no ready-made wheel for these computers
+required-environments = [
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",
+    "sys_platform == 'darwin' and platform_machine == 'x86_64'",
+    "sys_platform == 'win32' and platform_machine == 'AMD64'",
+]

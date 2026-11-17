@@ -20,7 +20,7 @@ Make a reel (work/<reel>/)
   build <reel>           scenes.py -> the animated page
   check <reel>           snapshot every moment that matters, for looking at before rendering
   render <reel>          draw every frame into an MP4 (1 to 3 minutes)
-  sound <reel>           voice + paper sounds, mixed and levelled
+  sound <reel>           voice + sound effects, mixed and levelled
   final <reel>           contact sheet, length and loudness of the finished MP4
   finish <reel>          copy it to "Finished Reels/"
   all <reel>             voice (if missing), build, render, sound, finish

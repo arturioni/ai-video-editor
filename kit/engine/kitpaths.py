@@ -67,6 +67,21 @@ def style():
         sys.exit(f"My Style/style.json isn't valid JSON ({e}). Fix it, or run: kit/run.py style show")
 
 
+SOUND_SETS = ("soft", "paper")       # kit/assets/sounds/sounds.json: soft whooshes and clicks, or paper and pen
+
+
+def sound_set(st=None):
+    """which sound effects a look gets: its "sound" key ("soft", "paper" or "off"); "on" (older styles) follows the
+    marks: hand-drawn marks get paper and pen, clean lines get soft whooshes and clicks. None means no effects."""
+    st = style()[0] if st is None else st
+    s = st.get("sound", "on")
+    if s == "off":
+        return None
+    if s in SOUND_SETS:
+        return s
+    return "paper" if st.get("marks") == "hand" else "soft"
+
+
 def voice_speed():
     s = settings()
     if "voice_speed" in s:
